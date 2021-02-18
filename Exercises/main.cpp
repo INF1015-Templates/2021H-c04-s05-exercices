@@ -14,7 +14,6 @@
 #include <vector>
 #include <span>
 #include <utility>
-#include <deque>
 
 #include <cppitertools/range.hpp>
 #include <cppitertools/enumerate.hpp>
@@ -50,8 +49,8 @@ void runPrintExample() {
 	deque<int> deq = {1, 2, 3};
 	print2(cout, span<const int>(arr)); cout << "\n";
 	print2(cout, span<const int> (vec)); cout << "\n";
-	print2(cout, span(arr)); cout << "\n";
-	print2(cout, span(vec)); cout << "\n";
+	//print2(cout, span(arr)); cout << "\n";
+	//print2(cout, span(vec)); cout << "\n";
 	print3(cout, arr); cout << "\n";
 	print3(cout, vec); cout << "\n";
 	print3(cout, deq); cout << "\n";
@@ -59,30 +58,13 @@ void runPrintExample() {
 }
 
 void runVectorExample() {
-	{
-		array<int, 3> values1 = {1, 2, 3};
-		array<int, 3> values2 = {10, 20, 30};
-		Vector<int> foo = span<const int>(values1);
-		Vector<int> bar = span<const int>(values2);
-		foo += bar + bar;
-		foo -= bar;
-		cout << foo << "\n";
-	}
-	{
-		using F = Fraction;
-		array<Fraction, 3> values1 = {F(1, 1), F(1, 2), F(1, 3)};
-		array<Fraction, 3> values2 = {1, 2, 3};
-		array<int, 3> values3 = {10, 20, 30};
-		Vector<Fraction> foo(values1);
-		Vector<Fraction> bar(values2);
-		Vector<int> qux(values3);
-
-		cout << foo << "\n";
-		foo += Vector<Fraction>(qux);
-		cout << foo << "\n";
-		foo -= bar;
-		cout << foo << "\n";
-	}
+	array<int, 3> values1 = {1, 2, 3};
+	array<int, 3> values2 = {10, 20, 30};
+	Vector foo(values1);
+	Vector bar(values2);
+	foo += bar + bar;
+	foo -= bar;
+	cout << foo << "\n";
 }
 
 void runLambdaExample() {
@@ -106,11 +88,11 @@ void runLambdaExample() {
 
 int main() {
 	runArrayExample();
-	cout << "\n\n\n";
-	runPrintExample();
-	cout << "\n\n\n";
-	runVectorExample();
-	cout << "\n\n\n";
-	runLambdaExample();
+	//cout << "\n\n\n";
+	//runPrintExample();
+	//cout << "\n\n\n";
+	//runVectorExample();
+	//cout << "\n\n\n";
+	//runLambdaExample();
 }
 
