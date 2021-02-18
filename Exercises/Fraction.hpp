@@ -9,6 +9,7 @@
 #include <cstdint>
 
 #include <iostream>
+#include <tuple>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ using namespace std;
 class Fraction {
 public:
 	Fraction(int numer = 0, int denom = 1);
+	Fraction(pair<int, int> p);
 
 	int getNumer() const { return numer_; }
 	int getDenom() const { return denom_; }

@@ -47,11 +47,30 @@ void runFractionExample() {
 }
 
 void runVectorExample() {
-	array<int, 3> values1 = {1, 2, 3};
-	array<int, 3> values2 = {10, 20, 30};
-	Vector foo(values1);
-	Vector bar(values2);
-	cout << foo << "\n";
+	{
+		array<int, 3> values1 = {1, 2, 3};
+		array<int, 3> values2 = {10, 20, 30};
+		Vector<int> foo = span<const int>(values1);
+		Vector<int> bar = span<const int>(values2);
+		foo += bar + bar;
+		foo -= bar;
+		cout << foo << "\n";
+	}
+	{
+		using F = Fraction;
+		array<Fraction, 3> values1 = {F(1, 1), F(1, 2), F(1, 3)};
+		array<Fraction, 3> values2 = {1, 2, 3};
+		array<int, 3> values3 = {10, 20, 30};
+		Vector<Fraction> foo(values1);
+		Vector<Fraction> bar(values2);
+		Vector<int> qux(values3);
+
+		cout << foo << "\n";
+		foo += Vector<Fraction>(qux);
+		cout << foo << "\n";
+		foo -= bar;
+		cout << foo << "\n";
+	}
 }
 
 

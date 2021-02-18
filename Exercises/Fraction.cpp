@@ -23,6 +23,9 @@ Fraction::Fraction(int numer, int denom)
 		simplify();
 }
 
+Fraction::Fraction(pair<int, int> p)
+: Fraction(p.first, p.second) { }
+
 double Fraction::asDouble() const {
 	return (double)numer_ / denom_;
 }
