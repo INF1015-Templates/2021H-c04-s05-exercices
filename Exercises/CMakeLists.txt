@@ -8,12 +8,6 @@ project(Exercises)
 # On met les fichiers sources (incluant les entêtes)
 set(ALL_FILES
     "main.cpp"
-    "Employee.hpp"
-    "Employee.cpp"
-    "Company.hpp"
-    "Company.cpp"
-    "Department.hpp"
-    "Department.cpp"
     "Fraction.hpp"
     "Fraction.cpp"
     "Vector.hpp"

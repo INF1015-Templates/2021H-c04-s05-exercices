@@ -22,8 +22,9 @@ using namespace iter;
 class Vector {
 public:
 	Vector() = default; // Petit truc pour dire au compilateur de générer pour nous le ctor par défaut.
-	Vector(const Vector& other);
-	Vector(Vector&& other);
+	Vector(const Vector& other); // Par copie
+	Vector(Vector&& other); // Par déplacement (ou par move)
+	Vector(int size, int value = {});
 	Vector(span<const int> values);
 	~Vector();
 
@@ -42,7 +43,7 @@ public:
 	friend ostream& operator<<(ostream& lhs, const Vector& rhs);
 
 private:
-	int* values_ = nullptr;
+	unique_ptr<int[]> values_;
 	int size_ = 0;
 };
 

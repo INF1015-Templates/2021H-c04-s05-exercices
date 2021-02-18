@@ -22,12 +22,18 @@ using namespace iter;
 Vector::Vector(const Vector& other) {
 	// On laisse l'initialisation par défaut puis on réutilise l'opérateur d'affectation.
 	*this = other;
-	// On a techniquement une double initialisation, mais on sait que c'est trival dans ce cas et ça simplifie le code vu qu'on a besoin d'être ans un état valide pour appeler resize().
+	// On a techniquement une double initialisation, mais on sait que c'est trival dans ce cas et ça simplifie le code vu qu'on a besoin d'être ans un état valide pour appeler l'opérateur d'affectation.
 }
 
 Vector::Vector(Vector&& other) {
 	// On laisse l'initialisation par défaut puis on réutilise l'opérateur d'affectation par déplacement (« move »).
 	*this = move(other);
+}
+
+Vector::Vector(int size, int value) {
+	resize(size);
+	for (auto&& i : range(size_))
+		values_[i] = value;
 }
 
 Vector::Vector(span<const int> values) {
@@ -47,33 +53,31 @@ Vector& Vector::operator=(const Vector& other) {
 	if (&other == this)
 		return *this;
 	// Pourrait optimiser en ne réallouant pas si on a l'espace suffisant.
-	delete[] values_;
-	values_ = new int[other.size_];
+	resize(0);
+	resize(other.size_);
 	for (int i : range(other.size_))
 		values_[i] = other.values_[i];
-	size_ = other.size_;
 	// On veut permettre l'affectation en cascade.
 	return *this;
 }
 
 Vector& Vector::operator=(Vector&& other) {
-	delete[] values_;
+	resize(0);
 	// On « vole » les ressources de l'autre objet.
-	values_ = other.values_;
+	values_ = move(other.values_);
 	size_ = other.size_;
 	// On remet à zéro l'autre objet (donc laissé dans un état valide).
-	other.values_ = nullptr;
 	other.size_ = 0;
 	// On veut permettre l'affectation en cascade.
 	return *this;
 }
 
 int* Vector::getData() {
-	return values_;
+	return values_.get();
 }
 
 const int* Vector::getData() const {
-	return values_;
+	return values_.get();
 }
 
 int Vector::getSize() const {
@@ -81,18 +85,17 @@ int Vector::getSize() const {
 }
 
 void Vector::resize(int size) {
-	auto old = values_;
-	values_ = nullptr;
+	auto old = move(values_);
 	// Redimensionner à 0 fait juste désallouer le contenu.
 	if (size != 0) {
 		// On alloue et on copie les anciennes données.
-		values_ = new int[size];
+		values_ = make_unique<int[]>(size);
 		// Si on redimensionne à plus petit, on copie juste les données qui entre (d'où le min).
 		for (int i : range(min(size_, size)))
 			values_[i] = old[i];
 	}
 	size_ = size;
-	delete[] old;
+	old.reset();
 }
 
 int& Vector::operator[](int index) {
