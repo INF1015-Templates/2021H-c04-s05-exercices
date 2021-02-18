@@ -23,6 +23,7 @@
 #include "Fraction.hpp"
 #include "Vector.hpp"
 #include "print.hpp"
+#include "lamda.hpp"
 
 using namespace std;
 using namespace iter;
@@ -84,6 +85,24 @@ void runVectorExample() {
 	}
 }
 
+void runLambdaExample() {
+	vector<int> foo = {1, 2, 3, 4, 5};
+	vector<int> bar = {10, 20, 30, 40, 50};
+	auto next1 = getNextFn(foo);
+	auto next2 = getNextFn(bar);
+	for (auto i : range(foo.size()))
+		cout << next1() << " ";
+	cout << "\n";
+	for (auto i : range(bar.size()))
+		cout << next2() << " ";
+	cout << "\n";
+
+	auto line = generateLine(10, 1);
+	for (auto&& x : {-1, 0, 1, 5, 10})
+		cout << line(x) << " ";
+	cout << "\n";
+}
+
 
 int main() {
 	runArrayExample();
@@ -91,5 +110,7 @@ int main() {
 	runPrintExample();
 	cout << "\n\n\n";
 	runVectorExample();
+	cout << "\n\n\n";
+	runLambdaExample();
 }
 

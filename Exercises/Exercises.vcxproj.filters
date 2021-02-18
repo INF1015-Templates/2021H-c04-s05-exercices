@@ -44,5 +44,8 @@
     <ClInclude Include="print.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="lamda.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

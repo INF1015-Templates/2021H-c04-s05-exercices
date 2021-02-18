@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Fraction.hpp" />
+    <ClInclude Include="lamda.hpp" />
     <ClInclude Include="print.hpp" />
     <ClInclude Include="Vector.hpp" />
   </ItemGroup>
