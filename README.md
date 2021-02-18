@@ -1,18 +1,15 @@
-# Pointeurs intelligents, opérateurs, copie (semaine 4)
+# Modèles (*templates*) de classe et de fonction, lambda
 
-## Fichiers `Employee.*`, `Company.*` et `Department.*`
+## Fichier `print.hpp`
 
-Exemple de la dernière fois, mais en utilisant des vecteurs et des pointeurs intelligents avec un mélange d'aggrégation et de composition.
+Exemples des slides sur les templates.
 
-## Fichiers `Fraction.*`
+## Fichiers `Fraction.*` et `Vector.*`
 
-Exemple des slides sur la surcharge d'opérateurs, mais avec plus d'opérateurs surchargés.
+Exemple de la dernière fois sur les vecteurs et les fractions. Les vecteurs ont maintenant quelques opérateurs arithmétiques.
 
-Les opérateurs de soustraction, de multiplication, de division et de comparaison sont un bon exercice à faire à la maison.
+Nous allons transformer cette classe en template pour permettre n'importe quel type sous-jacent (on avait seulement des `int` jusqu'à présent).
 
-## Fichiers `Vector.*`
+Un exercice à faire à la maison serait d'implémenter les opérateurs de comparaison (ou disons juste l'égalité) entre deux vecteurs de types différents.
 
-Exemple des slides sur la copie d'objet (dernière version avec les *move*). La classe est plus complète que dans les slides et inclue un opérateur d'indice (`operator[]`).
-
-Exercice à la maison : Changer la gestion manuelle de ressource par l'utilisation de `unique_ptr`.
 

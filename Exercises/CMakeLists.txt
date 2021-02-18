@@ -9,6 +9,7 @@ project(Exercises)
 set(ALL_FILES
     "main.cpp"
     "print.hpp"
+    "lambda.hpp"
     "Fraction.hpp"
     "Fraction.cpp"
     "Vector.hpp"
