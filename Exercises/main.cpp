@@ -14,6 +14,7 @@
 #include <vector>
 #include <span>
 #include <utility>
+#include <deque>
 
 #include <cppitertools/range.hpp>
 #include <cppitertools/enumerate.hpp>
@@ -21,29 +22,39 @@
 
 #include "Fraction.hpp"
 #include "Vector.hpp"
+#include "print.hpp"
 
 using namespace std;
 using namespace iter;
 
 
-void runFractionExample() {
-	Fraction foo(42, -4);
-	Fraction bar = 10;
-	Fraction qux = bar;
-	qux += -5;
-	qux += bar += Fraction(1, 2);
+void runArrayExample() {
+	Array<double, 3> foo;
+	foo[1] = 2.2; foo[2] = 4.4;
+	const auto& cfoo = foo;
+	print1(cout, &cfoo[0], foo.getSize());
+	cout << "\n";
+	Array bar = foo.toArray<int>();
+	print1(cout, &bar[0], bar.getSize());
+	cout << "\n";
+}
 
-	cout << "foo        = " << foo << "\n"
-	     << "bar        = " << bar << "\n"
-	     << "qux        = " << qux << "\n"
-	     << "-foo       = " << -foo << "\n"
-	     << "foo + bar  = " << (foo + bar) << "\n"
-	     << "foo + -bar = " << (foo + -bar) << "\n"
-	     << "bar        = " << bar << "\n"
-	     << "bar++      = " << bar++ << "\n"
-	     << "bar        = " << bar << "\n"
-	     << "++bar      = " << ++bar << "\n"
-	     << "foo >= bar = " << (foo >= bar) << "\n";
+void runPrintExample() {
+	int a[] = {4, 1, 3}; int b[] = {5, 6}; string c[] = {"b", "a"};
+	print1(cout, a, 3); print1(cout, b, 2); print1(cout, c, 2);
+	cout << "\n";
+
+	array<int, 2> arr = {3, 2};
+	vector<int> vec = {3, 2};
+	deque<int> deq = {1, 2, 3};
+	print2(cout, span<const int>(arr)); cout << "\n";
+	print2(cout, span<const int> (vec)); cout << "\n";
+	print2(cout, span(arr)); cout << "\n";
+	print2(cout, span(vec)); cout << "\n";
+	print3(cout, arr); cout << "\n";
+	print3(cout, vec); cout << "\n";
+	print3(cout, deq); cout << "\n";
+	//print3(cout, 42); cout << "\n"; // Erreur dans le for (pas capable d'itérer sur 42).
 }
 
 void runVectorExample() {
@@ -75,7 +86,9 @@ void runVectorExample() {
 
 
 int main() {
-	runFractionExample();
+	runArrayExample();
+	cout << "\n\n\n";
+	runPrintExample();
 	cout << "\n\n\n";
 	runVectorExample();
 }

@@ -8,6 +8,7 @@ project(Exercises)
 # On met les fichiers sources (incluant les entêtes)
 set(ALL_FILES
     "main.cpp"
+    "print.hpp"
     "Fraction.hpp"
     "Fraction.cpp"
     "Vector.hpp"
